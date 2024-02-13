@@ -1,5 +1,6 @@
 package hello.toCU.OrderServiceTest;
 
+import hello.toCU.AppConfig;
 import hello.toCU.member.Grade;
 import hello.toCU.member.Member;
 import hello.toCU.member.MemberService;
@@ -8,11 +9,19 @@ import hello.toCU.order.Order;
 import hello.toCU.order.OrderService;
 import hello.toCU.order.OrderServiceImpl;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class OrderServiceTest {
-    MemberService memberService = new MemberServiceImpl();
-    OrderService orderService = new OrderServiceImpl();
+    MemberService memberService ;
+    OrderService orderService;
+    @BeforeEach // 동작전에 먼저 실행
+    public void beforeEach(){
+        AppConfig appConfig = new AppConfig();
+        memberService = appConfig.memberService();
+        orderService = appConfig.orderService();
+    }
+
 
     @Test
     void createOrder(){
